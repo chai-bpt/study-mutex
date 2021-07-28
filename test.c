@@ -13,8 +13,9 @@ void lock_init(void)
 }
 void lock_get(void)
 {
-	while(lock == 1);
-	lock = 1;
+	while((__sync_lock_test_and_set(&lock, 1)) == 1);
+	//while(lock == 1);
+	//lock = 1;
 }
 void lock_put(void)
 {
