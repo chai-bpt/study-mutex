@@ -31,7 +31,7 @@ int main(int argvc, char* argv[])
 	pthread_create( &thread1, NULL, ThreadFunc, NULL);
 	printf("\n\tThread1 created\n");
       
-//       	sleep(1);
+       	sleep(1);
 
        	pthread_create( &thread2, NULL, ThreadFunc, NULL);
         printf("\n\tThread2 created\n");
