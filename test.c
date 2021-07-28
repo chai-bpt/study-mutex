@@ -3,7 +3,7 @@
 #include <pthread.h>
 
 #define LOOP_COUNT_MAX 10000000
-unsigned long ulgGlobVar = 0;
+unsigned int uigGlobVar = 0;
 
 void* ThreadFunc(void* vpTemp)
 {	
@@ -13,7 +13,8 @@ void* ThreadFunc(void* vpTemp)
 
 	for(ulLoopCount = 0; ulLoopCount < LOOP_COUNT_MAX; ulLoopCount++)
 	{
-		ulgGlobVar++;
+		//uigGlobVar++;
+ 		__sync_fetch_and_add(&uigGlobVar,1);
 	}
 
 	printf("\n\tThreadFunc_END\n");
@@ -26,12 +27,12 @@ int main(int argvc, char* argv[])
 	printf("\n");
 	printf("\n\tmain_START\n");
 
-	printf("\n\tulgGlobVar = %lu\n",ulgGlobVar);
+	printf("\n\tuigGlobVar = %d\n",uigGlobVar);
 
 	pthread_create( &thread1, NULL, ThreadFunc, NULL);
 	printf("\n\tThread1 created\n");
       
-       	sleep(1);
+       	//sleep(1);
 
        	pthread_create( &thread2, NULL, ThreadFunc, NULL);
         printf("\n\tThread2 created\n");
@@ -42,7 +43,7 @@ int main(int argvc, char* argv[])
 	pthread_join(thread2, NULL);
         printf("\n\tThread2 joined\n");
 
-	printf("\n\tulgGlobVar = %lu\n",ulgGlobVar);
+	printf("\n\tuigGlobVar = %d\n",uigGlobVar);
 
 	printf("\n\tmain_END\n");
 	printf("\n");
