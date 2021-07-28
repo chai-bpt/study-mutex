@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <sched.h>
 
 #define LOOP_COUNT_MAX 10000000
 unsigned int uigGlobVar = 0;
@@ -13,7 +14,8 @@ void lock_init(void)
 }
 void lock_get(void)
 {
-	while((__sync_lock_test_and_set(&lock, 1)) == 1);
+	while((__sync_lock_test_and_set(&lock, 1)) == 1)
+		sched_yield();
 	//while(lock == 1);
 	//lock = 1;
 }
