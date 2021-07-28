@@ -5,6 +5,22 @@
 #define LOOP_COUNT_MAX 10000000
 unsigned int uigGlobVar = 0;
 
+unsigned int lock = 0;
+
+void lock_init(void)
+{
+	lock = 0;
+}
+void lock_get(void)
+{
+	while(lock == 1);
+	lock = 1;
+}
+void lock_put(void)
+{
+	lock = 0;
+}
+
 void* ThreadFunc(void* vpTemp)
 {	
 	unsigned long ulLoopCount = 0;
@@ -13,8 +29,10 @@ void* ThreadFunc(void* vpTemp)
 
 	for(ulLoopCount = 0; ulLoopCount < LOOP_COUNT_MAX; ulLoopCount++)
 	{
-		//uigGlobVar++;
- 		__sync_fetch_and_add(&uigGlobVar,1);
+		lock_get();
+		uigGlobVar++;
+		lock_put();
+ 		//__sync_fetch_and_add(&uigGlobVar,1);
 	}
 
 	printf("\n\tThreadFunc_END\n");

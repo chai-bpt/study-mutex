@@ -7,9 +7,9 @@ chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ ./test
 
 	Thread1 created
 
-	ThreadFunc_START
-
 	Thread2 created
+
+	ThreadFunc_START
 
 	ThreadFunc_START
 
@@ -21,7 +21,7 @@ chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ ./test
 
 	Thread2 joined
 
-	uigGlobVar = 20000000
+	uigGlobVar = 15803527
 
 	main_END
 
@@ -42,13 +42,13 @@ chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ ./test
 
 	ThreadFunc_END
 
-	ThreadFunc_END
-
 	Thread1 joined
+
+	ThreadFunc_END
 
 	Thread2 joined
 
-	uigGlobVar = 20000000
+	uigGlobVar = 10903639
 
 	main_END
 
