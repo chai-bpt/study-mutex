@@ -32,9 +32,10 @@ void* ThreadFunc(void* vpTemp)
 
 	for(ulLoopCount = 0; ulLoopCount < LOOP_COUNT_MAX; ulLoopCount++)
 	{
-		lock_get();
-		uigGlobVar++;
-		lock_put();
+		//lock_get();
+		//uigGlobVar++;
+		//lock_put();
+		__atomic_fetch_add(&uigGlobVar, 1, __ATOMIC_RELAXED);
  		//__sync_fetch_and_add(&uigGlobVar,1);
 	}
 

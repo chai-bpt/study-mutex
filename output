@@ -1,35 +1,4 @@
-chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ time ./test_without_yeild 
-
-
-	main_START
-
-	uigGlobVar = 0
-
-	Thread1 created
-
-	ThreadFunc_START
-
-	Thread2 created
-
-	ThreadFunc_START
-
-	ThreadFunc_END
-
-	Thread1 joined
-
-	ThreadFunc_END
-
-	Thread2 joined
-
-	uigGlobVar = 20000000
-
-	main_END
-
-
-real	0m2.253s
-user	0m4.399s
-sys	0m0.000s
-chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ time ./test_with_yeild 
+chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ ./test 
 
 
 	main_START
@@ -56,42 +25,7 @@ chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ time ./test_w
 
 	main_END
 
-
-real	0m0.343s
-user	0m0.509s
-sys	0m0.114s
-chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ time ./test_without_yeild 
-
-
-	main_START
-
-	uigGlobVar = 0
-
-	Thread1 created
-
-	ThreadFunc_START
-
-	Thread2 created
-
-	ThreadFunc_START
-
-	ThreadFunc_END
-
-	ThreadFunc_END
-
-	Thread1 joined
-
-	Thread2 joined
-
-	uigGlobVar = 20000000
-
-	main_END
-
-
-real	0m3.082s
-user	0m6.132s
-sys	0m0.005s
-chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ time ./test_with_yeild 
+chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ ./test 
 
 
 	main_START
@@ -118,9 +52,32 @@ chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ time ./test_w
 
 	main_END
 
+chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ ./test 
 
-real	0m0.439s
-user	0m0.661s
-sys	0m0.172s
+
+	main_START
+
+	uigGlobVar = 0
+
+	Thread1 created
+
+	ThreadFunc_START
+
+	Thread2 created
+
+	ThreadFunc_START
+
+	ThreadFunc_END
+
+	ThreadFunc_END
+
+	Thread1 joined
+
+	Thread2 joined
+
+	uigGlobVar = 20000000
+
+	main_END
+
 chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ 
 
