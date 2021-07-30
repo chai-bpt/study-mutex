@@ -2,27 +2,37 @@
 #include <unistd.h>
 #include <pthread.h>
 #include <sched.h>
+#include <string.h>
 
 #define LOOP_COUNT_MAX 10000000
+
+typedef struct __lock_t {
+        int iCounter;
+} lock_t;
+
 unsigned int uigGlobVar = 0;
 
-unsigned int lock = 0;
+lock_t lock_uigGlobVar;
 
-void lock_init(void)
+void lock_init(lock_t* plock)
 {
-	lock = 0;
+	memset(plock, 0, sizeof(lock_t));
+	plock->iCounter = 0;
 }
-void lock_get(void)
+
+void lock_get(lock_t* plock)
 {
-	while((__sync_lock_test_and_set(&lock, 1)) == 1)
+	while((__sync_lock_test_and_set(&plock->iCounter, 1)) == 1)
 		sched_yield();
-	//while(lock == 1);
-	//lock = 1;
 }
-void lock_put(void)
+
+void lock_put(lock_t* plock)
 {
-	lock = 0;
+	plock->iCounter = 0;
 }
+
+
+
 
 void* ThreadFunc(void* vpTemp)
 {	
@@ -32,15 +42,16 @@ void* ThreadFunc(void* vpTemp)
 
 	for(ulLoopCount = 0; ulLoopCount < LOOP_COUNT_MAX; ulLoopCount++)
 	{
-		//lock_get();
-		//uigGlobVar++;
-		//lock_put();
-		__atomic_fetch_add(&uigGlobVar, 1, __ATOMIC_RELAXED);
- 		//__sync_fetch_and_add(&uigGlobVar,1);
+		lock_get(&lock_uigGlobVar);
+		uigGlobVar++;
+		lock_put(&lock_uigGlobVar);
 	}
 
 	printf("\n\tThreadFunc_END\n");
 }
+
+
+
 
 int main(int argvc, char* argv[])
 {
@@ -51,11 +62,11 @@ int main(int argvc, char* argv[])
 
 	printf("\n\tuigGlobVar = %d\n",uigGlobVar);
 
+	lock_init(&lock_uigGlobVar);
+
 	pthread_create( &thread1, NULL, ThreadFunc, NULL);
 	printf("\n\tThread1 created\n");
       
-       	//sleep(1);
-
        	pthread_create( &thread2, NULL, ThreadFunc, NULL);
         printf("\n\tThread2 created\n");
 
