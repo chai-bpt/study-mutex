@@ -7,15 +7,8 @@
 
 #define LOOP_COUNT_MAX 10000000
 
-/*
 typedef struct __lock_t {
-        int iQueueTailTkt;
-	int iCurrentTkt;
-} lock_t;
-*/
-
-typedef struct __lock_t {
-	sem_t sem ;
+        pthread_mutex_t mutex;
 }lock_t;
 
 unsigned int uigGlobVar = 0;
@@ -24,17 +17,17 @@ lock_t lock_uigGlobVar;
 
 void lock_init(lock_t* plock)
 {
-	sem_init(&plock->sem, 0, 1);
+	pthread_mutex_init(&plock->mutex, NULL);
 }
 
 void lock_get(lock_t* plock)
 {
-	sem_wait(&plock->sem);
+	pthread_mutex_lock(&plock->mutex);
 }
 
 void lock_put(lock_t* plock)
 {
-	sem_post(&plock->sem);
+	pthread_mutex_unlock(&plock->mutex);
 }
 
 
