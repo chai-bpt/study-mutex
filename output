@@ -25,5 +25,36 @@ chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ ./test
 
 	main_END
 
+chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ time ./test 
+
+
+	main_START
+
+	uigGlobVar = 0
+
+	Thread1 created
+
+	ThreadFunc_START
+
+	Thread2 created
+
+	ThreadFunc_START
+
+	ThreadFunc_END
+
+	ThreadFunc_END
+
+	Thread1 joined
+
+	Thread2 joined
+
+	uigGlobVar = 20000000
+
+	main_END
+
+
+real	0m6.999s
+user	0m9.315s
+sys	0m4.672s
 chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ 
 
