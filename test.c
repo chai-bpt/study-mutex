@@ -7,7 +7,7 @@
 #define LOOP_COUNT_MAX 10000000
 
 typedef struct __lock_t {
-        int iAtomicCurrentTkt;
+        int iQueueTailTkt;
 	int iCurrentTkt;
 } lock_t;
 
@@ -18,7 +18,7 @@ lock_t lock_uigGlobVar;
 void lock_init(lock_t* plock)
 {
 	memset(plock, 0, sizeof(lock_t));
-	plock->iAtomicCurrentTkt = 0;
+	plock->iQueueTailTkt = 0;
 	plock->iCurrentTkt = 0;
 }
 
@@ -26,7 +26,7 @@ void lock_get(lock_t* plock)
 {
 	int iMyTkt = 0;
 
-	iMyTkt = __sync_fetch_and_add(&plock->iAtomicCurrentTkt, 1);
+	iMyTkt = __sync_fetch_and_add(&plock->iQueueTailTkt, 1);
 	while(iMyTkt != plock->iCurrentTkt);
 		sched_yield();
 	
