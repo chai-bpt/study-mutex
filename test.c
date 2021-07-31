@@ -22,7 +22,8 @@ void lock_init(lock_t* plock)
 
 void lock_get(lock_t* plock)
 {
-	while((__sync_lock_test_and_set(&plock->iCounter, 1)) == 1)
+	while(__sync_val_compare_and_swap(&plock->iCounter, 0, 1) == 1)
+	//while((__sync_lock_test_and_set(&plock->iCounter, 1)) == 1)
 		sched_yield();
 }
 
