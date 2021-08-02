@@ -25,6 +25,8 @@ chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ ./test
 
 	main_END
 
+chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ 
+chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ 
 chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ time ./test 
 
 
@@ -53,8 +55,8 @@ chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ time ./test
 	main_END
 
 
-real	0m6.999s
-user	0m9.315s
-sys	0m4.672s
+real	0m10.771s
+user	0m12.565s
+sys	0m8.955s
 chaitanya@chaitanya-HP-Laptop-14-bs0xx:~/work/linking/study-mutex$ 
 
